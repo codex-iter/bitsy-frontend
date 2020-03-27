@@ -19,7 +19,7 @@
                         </div>
                         <input type="password" name="password" id="password" class="form-control cursive" formControlName="password" placeholder="Password" required>
                     </div>
-                    <p id="error" class="text-danger" [hidden]="!this.loginForm.touched || (this.loginForm.valid && !this.loginForm.touched)">
+                    <p id="error" class="text-danger" hidden>
                         Username or password is missing
                     </p>
                     <div class="input-group">

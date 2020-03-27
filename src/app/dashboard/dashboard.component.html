@@ -16,14 +16,18 @@
     <div class="toggle-display row">
         <div class="col-md-2 col-lg-3"></div>
         <div class="col-md-8 col-lg-6">
-            <div class="card" *ngFor="let url of urlList">
-                <h5 class="card-header">{{url.shortUri}}</h5>
+            <div class="card" *ngFor="let url of urlList; let ind=index">
+                <h5 class="card-header"><em class="fa fa-link"></em> {{url.shortUri}}</h5>
                 <div class="card-body">
-                    <h5 class="card-title">{{url.originalUri}}</h5>
-                    <p class="card-text">Created At: {{url.createdAt}}</p>
-                    <button class="btn btn-danger">Delete</button>
+                    <h5 class="card-title"><em class="fa fa-angle-right"></em> &nbsp; <em>{{url.originalUri}}</em></h5>
+                    <p class="card-text"><em class="fa fa-calendar-alt"></em>&nbsp; <em>{{url.createdAt.substr(0, 10)}}</em></p>
+                    <button class="btn btn-secondary" id="del-{{ind}}" (click)="delete($event)">Delete</button>
+                    <button class="btn btn-info btn-mar" id="index-{{ind}}" (click)="confirmDelete($event)" hidden>Confirm Delete</button>
+                    <button class="btn btn-primary btn-mar" id="can-{{ind}}" (click)="cancelDelete($event)" hidden>Cancel</button>
                 </div>
             </div>
+            <div *ngIf="urlList"></div>
+            <div *ngIf="loadError">Error Occured while loading ...</div>
         </div>
         <div class="col-md-2 col-lg-3"></div>
     </div>
@@ -41,12 +45,13 @@
                         </div>
                         <input type="text" name="username" id="username" class="form-control" formControlName="newurl" placeholder="Enter URL Here">
                     </div>
-                    <p id="error" class="text-danger" [hidden]="!this.registerationForm.touched || (this.registerationForm.valid && !this.registerationForm.touched)">
+                    <p id="error" class="text-danger" hidden>
                         URL is missing
                     </p>
                     <div class="input-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                    <p id="new-reg-message" class="text-danger"></p>
                 </div>
             </form>
         </div>
