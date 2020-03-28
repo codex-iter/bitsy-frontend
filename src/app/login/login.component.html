@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-sm-2 col-md-3 col-lg-4"></div>
+    <div class="col-sm-8 col-md-6 col-lg-4">
+        <div class="mx-auto">
+            <form [formGroup]="loginForm" (ngSubmit)="onsubmit()">
+                <div id="logo" class="text-center">
+                    <p>bitsy</p>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><em class="fa fa-user"></em></div>
+                        </div>
+                        <input type="text" name="username" id="username" class="form-control cursive" formControlName="username" disabled required>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><em class="fa fa-key"></em></div>
+                        </div>
+                        <input type="password" name="password" id="password" class="form-control cursive" formControlName="password" placeholder="Password" required>
+                    </div>
+                    <p id="error" class="text-danger" hidden>
+                        Username or password is missing
+                    </p>
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div id="follow-links" class="text-center cursive">
+                <div>Follow Us On</div>
+                <div>
+                    <a href="https://github.com/codex-iter/" target="_blank"><em class="fab fa-github-square"></em></a>
+                    <a href="https://www.facebook.com/codexiter/" target="_blank"><em class="fab fa-facebook"></em></a>
+                    <a href="https://www.instagram.com/codexiter/" target="_blank"><em class="fab fa-instagram"></em></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 col-md-3 col-lg-4"></div>
+</div>
