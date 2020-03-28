@@ -78,11 +78,16 @@ export class DashboardComponent implements OnInit {
       const newuri = this.registerationForm.get('newurl').value;
       this.uriService.newUri({uri: newuri}).subscribe((data) => {
         if (data['status'] === 200) {
-          document.getElementById('new-reg-message').innerText = 
-          'Registered new URL\nOrignial URL: ' + data['originalUri'] + '\nShort URL: ' + data['shortUri'];
+          document.getElementById('new-reg-title').innerText = data['message'];
+          document.getElementById('new-short-uri').innerText = data['shortUri'];
+          document.getElementById('new-original-uri').innerText = data['originalUri'];
+          document.getElementById('new-reg-message').hidden = false;
           this.fetchAll();
         } else if (data['status'] === 201) {
-          document.getElementById('new-reg-message').innerText = 'URI already shortened\nShort URL: ' + data['shortUri'];
+          document.getElementById('new-reg-title').innerText = data['message'];
+          document.getElementById('new-short-uri').innerText = data['shortUri'];
+          document.getElementById('new-original-uri').innerText = data['originalUri'];
+          document.getElementById('new-reg-message').hidden = false;
         } else if (data['status'] === 203) {
           document.getElementById('new-reg-message').innerText = 'INVALID URL ERROR: Enter a valid URL';
         } else {
