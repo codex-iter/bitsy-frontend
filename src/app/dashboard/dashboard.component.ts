@@ -81,18 +81,17 @@ export class DashboardComponent implements OnInit {
           document.getElementById('new-reg-title').innerText = data['message'];
           document.getElementById('new-short-uri').innerText = data['shortUri'];
           document.getElementById('new-original-uri').innerText = data['originalUri'];
-          document.getElementById('new-reg-message').hidden = false;
           this.fetchAll();
         } else if (data['status'] === 201) {
           document.getElementById('new-reg-title').innerText = data['message'];
           document.getElementById('new-short-uri').innerText = data['shortUri'];
           document.getElementById('new-original-uri').innerText = data['originalUri'];
-          document.getElementById('new-reg-message').hidden = false;
         } else if (data['status'] === 203) {
           document.getElementById('new-reg-message').innerText = 'INVALID URL ERROR: Enter a valid URL';
         } else {
           document.getElementById('new-reg-message').innerText = 'Error Occured while registering the new URL';
         }
+        document.getElementById('new-reg-message').hidden = false;
       });
     } else {
       document.getElementById('error').hidden = false;
@@ -103,7 +102,7 @@ export class DashboardComponent implements OnInit {
     document.getElementById('logout').classList.add('active');
     this.auth.logout().subscribe((data) => {
       if (data['status'] === 200) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
     });
   }

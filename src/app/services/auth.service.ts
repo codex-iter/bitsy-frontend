@@ -16,11 +16,11 @@ export class AuthService {
 
   login = (obj: any) => {
     const loginEndpoint = this.apiEndoint + 'user/login';
-    return this.http.post(loginEndpoint, obj);
+    return this.http.post(loginEndpoint, obj, {withCredentials: true});
   }
 
   logout = () => {
     const logoutEndpoint = this.apiEndoint + 'user/logout';
-    return this.http.post(logoutEndpoint, {});
+    return this.http.post(logoutEndpoint, {}, {withCredentials: true});
   }
 }

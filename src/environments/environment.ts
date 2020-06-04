@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndoint: 'https://bitsy-codex.herokuapp.com/'
+//   apiEndoint: 'https://bitsy-codex.herokuapp.com/'
+apiEndoint: 'http://localhost:3000/'
 };
 
 /*
