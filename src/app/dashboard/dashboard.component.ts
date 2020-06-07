@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private auth: AuthService, private uriService: UriService, private router: Router) {
     this.registerationForm = this.fb.group({
-      newurl: ['', Validators.required]
+      newurl: ['', Validators.required],
+      shorturl: ['', Validators.required]
     });
   }
 
@@ -76,7 +77,8 @@ export class DashboardComponent implements OnInit {
   onsubmit = () => {
     if (this.registerationForm.valid) {
       const newuri = this.registerationForm.get('newurl').value;
-      this.uriService.newUri({uri: newuri}).subscribe((data) => {
+      const shorturi = this.registerationForm.get('shorturl').value;
+      this.uriService.newUri({uri: newuri, shortUri: shorturi}).subscribe((data) => {
         if (data['status'] === 200) {
           document.getElementById('new-reg-title').innerText = data['message'];
           document.getElementById('new-short-uri').innerText = data['shortUri'];
@@ -104,7 +106,10 @@ export class DashboardComponent implements OnInit {
       if (data['status'] === 200) {
         this.router.navigate(['/']);
       }
+    }, (error) => {
+        this.router.navigate(['/']);
     });
+    this.router.navigate(['/']);
   }
 
 }
