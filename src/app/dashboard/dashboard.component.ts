@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private auth: AuthService, private uriService: UriService, private router: Router) {
     this.registerationForm = this.fb.group({
-      newurl: ['', Validators.required]
+      newurl: ['', Validators.required],
+      shorturl: ['', Validators.required]
     });
   }
 
@@ -76,23 +77,23 @@ export class DashboardComponent implements OnInit {
   onsubmit = () => {
     if (this.registerationForm.valid) {
       const newuri = this.registerationForm.get('newurl').value;
-      this.uriService.newUri({uri: newuri}).subscribe((data) => {
+      const shorturi = this.registerationForm.get('shorturl').value;
+      this.uriService.newUri({uri: newuri, shortUri: shorturi}).subscribe((data) => {
         if (data['status'] === 200) {
           document.getElementById('new-reg-title').innerText = data['message'];
           document.getElementById('new-short-uri').innerText = data['shortUri'];
           document.getElementById('new-original-uri').innerText = data['originalUri'];
-          document.getElementById('new-reg-message').hidden = false;
           this.fetchAll();
         } else if (data['status'] === 201) {
           document.getElementById('new-reg-title').innerText = data['message'];
           document.getElementById('new-short-uri').innerText = data['shortUri'];
           document.getElementById('new-original-uri').innerText = data['originalUri'];
-          document.getElementById('new-reg-message').hidden = false;
         } else if (data['status'] === 203) {
           document.getElementById('new-reg-message').innerText = 'INVALID URL ERROR: Enter a valid URL';
         } else {
           document.getElementById('new-reg-message').innerText = 'Error Occured while registering the new URL';
         }
+        document.getElementById('new-reg-message').hidden = false;
       });
     } else {
       document.getElementById('error').hidden = false;
@@ -103,9 +104,12 @@ export class DashboardComponent implements OnInit {
     document.getElementById('logout').classList.add('active');
     this.auth.logout().subscribe((data) => {
       if (data['status'] === 200) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       }
+    }, (error) => {
+        this.router.navigate(['/']);
     });
+    this.router.navigate(['/']);
   }
 
 }

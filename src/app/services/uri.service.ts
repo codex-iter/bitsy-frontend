@@ -16,16 +16,16 @@ export class UriService {
 
   fetchAll() {
     const uriListEndpoint = this.apiEndpoint + 'uri/all';
-    return this.http.get(uriListEndpoint);
+    return this.http.get(uriListEndpoint, {withCredentials: true});
   }
 
   deleteUri(obj: any) {
     const deleteEndpoint = this.apiEndpoint + 'delete';
-    return this.http.post(deleteEndpoint, obj);
+    return this.http.post(deleteEndpoint, obj, {withCredentials: true});
   }
 
   newUri(obj: any) {
     const newUriRegEndpoit = this.apiEndpoint + 'new';
-    return this.http.post(newUriRegEndpoit, obj);
+    return this.http.post(newUriRegEndpoit, obj, {withCredentials: true});
   }
 }
